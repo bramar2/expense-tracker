@@ -1,5 +1,7 @@
 #include "expense.hpp"
 
+#include <iostream>
+
 namespace expensetracker {
 
 	void writestr(std::ostream& out, const std::string& str) {
@@ -24,10 +26,13 @@ namespace expensetracker {
 
 
 	bool readstr(const std::string& row, size_t& start, std::string& res) {
+		if (start >= row.size()) {
+			return false;
+		}
 		if (row[start] != '"') {
-			size_t comma = row.find(start, ',');
+			size_t comma = row.find(',', start);
 			if (comma == std::string::npos) {
-				return false;
+				comma = row.size();
 			}
 			res = row.substr(start, comma - start);
 			start = comma + 1;
@@ -63,7 +68,6 @@ namespace expensetracker {
 			start = comma + 1;
 		} else return std::nullopt;
 
-
 		if (!readstr(row, start, exp.description)) {
 			return std::nullopt;
 		}
@@ -71,7 +75,6 @@ namespace expensetracker {
 		if (!readstr(row, start, exp.category)) {
 			return std::nullopt;
 		}
-
 
 		if (size_t comma = row.find(',', start); comma != std::string::npos &&
 			std::from_chars(row.c_str() + start, row.c_str() + comma, exp.amount).ec == std::errc{}) {
