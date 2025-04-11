@@ -36,7 +36,7 @@ namespace expensetracker {
 	std::map<std::string, std::string> parse_arg(int argc, char** argv) {
 		std::map<std::string, std::string> res;
 
-		for (int i = 1; i < argc; i++) {
+		for (int i = 2; i < argc; i++) {
 			std::string arg(argv[i]);
 			auto it = ARG_MAP.find(arg);
 			if (it == ARG_MAP.end()) {
