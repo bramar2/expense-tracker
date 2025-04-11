@@ -18,10 +18,10 @@ namespace expensetracker {
 	}
 	void Expense::write(std::ostream& out) const {
 		out << id << ",";
+		out << amount << ",";
 		writestr(out, description); out << ",";
 		writestr(out, category); out << ",";
-		out << amount << ",";
-		out << date;
+		writestr(out, date);
 	}
 
 
@@ -68,6 +68,11 @@ namespace expensetracker {
 			start = comma + 1;
 		} else return std::nullopt;
 
+		if (size_t comma = row.find(',', start); comma != std::string::npos &&
+			std::from_chars(row.c_str() + start, row.c_str() + comma, exp.amount).ec == std::errc{}) {
+			start = comma + 1;
+		} else return std::nullopt;
+
 		if (!readstr(row, start, exp.description)) {
 			return std::nullopt;
 		}
@@ -75,11 +80,6 @@ namespace expensetracker {
 		if (!readstr(row, start, exp.category)) {
 			return std::nullopt;
 		}
-
-		if (size_t comma = row.find(',', start); comma != std::string::npos &&
-			std::from_chars(row.c_str() + start, row.c_str() + comma, exp.amount).ec == std::errc{}) {
-			start = comma + 1;
-		} else return std::nullopt;
 
 		if (!readstr(row, start, exp.date)) {
 			return std::nullopt;

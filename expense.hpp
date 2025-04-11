@@ -7,11 +7,11 @@
 namespace expensetracker {
 	class Expense {
 	public:
-		uint32_t id;
+		uint64_t id;
+		uint64_t amount;
 
 		std::string description;
 		std::string category;
-		uint32_t amount;
 		std::string date; // YYYY-MM-DD format
 		
 
