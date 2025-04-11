@@ -16,8 +16,8 @@ namespace expensetracker {
 	}
 	void Expense::write(std::ostream& out) const {
 		out << id << ",";
-		writestr(out, description);
-		writestr(out, category);
+		writestr(out, description); out << ",";
+		writestr(out, category); out << ",";
 		out << amount << ",";
 		out << date;
 	}
