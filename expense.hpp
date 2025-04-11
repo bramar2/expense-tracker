@@ -12,9 +12,7 @@ namespace expensetracker {
 		std::string description;
 		std::string category;
 		uint32_t amount;
-		uint32_t year;
-		uint8_t month;
-		uint8_t day;
+		std::string date; // YYYY-MM-DD format
 		
 
 		void write(std::ostream& out);

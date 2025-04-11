@@ -19,9 +19,7 @@ namespace expensetracker {
 		writestr(out, description);
 		writestr(out, category);
 		out << amount << ",";
-		out << year << ",";
-		out << month << ",";
-		out << day;
+		out << date;
 	}
 
 
@@ -80,21 +78,10 @@ namespace expensetracker {
 			start = comma + 1;
 		} else return std::nullopt;
 
-		if (size_t comma = row.find(',', start); comma != std::string::npos &&
-			std::from_chars(row.c_str() + start, row.c_str() + comma, exp.year).ec == std::errc{}) {
-			start = comma + 1;
-		} else return std::nullopt;
-
-		if (size_t comma = row.find(',', start); comma != std::string::npos &&
-			std::from_chars(row.c_str() + start, row.c_str() + comma, exp.month).ec == std::errc{}) {
-			start = comma + 1;
-		} else return std::nullopt;
-
-		if (std::from_chars(row.c_str() + start, row.c_str() + row.size(), exp.day).ec != std::errc{}) {
+		if (!readstr(row, start, exp.date)) {
 			return std::nullopt;
 		}
-
-
+		
 		return exp;
 	}
 }
