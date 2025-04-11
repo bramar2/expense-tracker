@@ -15,7 +15,7 @@ namespace expensetracker {
 		std::string date; // YYYY-MM-DD format
 		
 
-		void write(std::ostream& out);
+		void write(std::ostream& out) const;
 		static std::optional<Expense> read(std::string& row);
 	};
 }

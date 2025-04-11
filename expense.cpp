@@ -14,7 +14,7 @@ namespace expensetracker {
 			out << '"';
 		}
 	}
-	void Expense::write(std::ostream& out) {
+	void Expense::write(std::ostream& out) const {
 		out << id << ",";
 		writestr(out, description);
 		writestr(out, category);
@@ -81,7 +81,7 @@ namespace expensetracker {
 		if (!readstr(row, start, exp.date)) {
 			return std::nullopt;
 		}
-		
+
 		return exp;
 	}
 }
