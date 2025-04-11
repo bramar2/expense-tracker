@@ -20,11 +20,14 @@ namespace expensetracker {
 		{"-a", ARG_AMOUNT},
 		{"--amount", ARG_AMOUNT},
 
-		{"-m", ARG_MONTH},
-		{"--month", ARG_MONTH},
+		{"-s", ARG_START_DATE},
+		{"--start", ARG_START_DATE},
 
-		{"-y", ARG_YEAR},
-		{"--year", ARG_YEAR},
+		{"-e", ARG_END_DATE},
+		{"--end", ARG_END_DATE},
+
+		{"-p", ARG_PERIOD},
+		{"--period", ARG_PERIOD},
 
 		{"-s", ARG_SORT},
 		{"--sort", ARG_SORT}
