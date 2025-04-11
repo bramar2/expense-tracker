@@ -24,7 +24,10 @@ namespace expensetracker {
 		{"--month", ARG_MONTH},
 
 		{"-y", ARG_YEAR},
-		{"--year", ARG_YEAR}
+		{"--year", ARG_YEAR},
+
+		{"-s", ARG_SORT},
+		{"--sort", ARG_SORT}
 	};
 
 	std::map<std::string, std::string> parse_arg(int argc, char** argv) {
