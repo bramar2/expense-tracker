@@ -67,4 +67,9 @@ namespace expensetracker {
 			 (a[1] < b[1]) || (a[1] == b[1] &&
 			 (a[2] < b[2])));
 	}
+	bool date_cmp_less_equal(const Date& a, const Date& b) {
+		return (a[0] < b[0]) || (a[0] == b[0] &&
+			 (a[1] < b[1]) || (a[1] == b[1] &&
+			 (a[2] <= b[2])));
+	}
 }
