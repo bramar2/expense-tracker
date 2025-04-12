@@ -4,7 +4,7 @@
 #include <stdexcept>
 
 namespace expensetracker {
-	std::optional<std::array<uint32_t, 3>> parse_date(const std::string& dateStr) {
+	std::optional<Date> parse_date(const std::string& dateStr) {
 		static constexpr uint32_t MAX_YEAR = 9999;
 		static constexpr uint32_t MONTHS[13] {
 			0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
@@ -21,7 +21,7 @@ namespace expensetracker {
 		size_t second = dateStr.find('-');
 		if (second == std::string::npos) second = dateStr.size();
 		try {
-			std::array<uint32_t, 3> result;
+			Date result;
 			const char* data = dateStr.data();
 
 			if (auto res = std::from_chars(data, data + first, result[0]); res.ec != std::errc {}) {
