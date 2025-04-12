@@ -62,4 +62,9 @@ namespace expensetracker {
 			return std::nullopt;
 		}
 	}
+	bool date_cmp_less(const Date& a, const Date& b) {
+		return (a[0] < b[0]) || (a[0] == b[0] &&
+			 (a[1] < b[1]) || (a[1] == b[1] &&
+			 (a[2] < b[2])));
+	}
 }
