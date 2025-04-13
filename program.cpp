@@ -81,7 +81,7 @@ void print_data(const std::vector<Expense>& data) {
 	}
 
 	if (!data.empty()) {
-		std::cout << "# (" << data.size() << " entries)\n";
+		std::cout << "# (" << data.size() << " " << (data.size() == 1 ? "entry" : "entries") << ")\n";
 	}
 
 	std::cout << "#";
@@ -318,7 +318,7 @@ int cmd_summary(std::map<std::string, std::string>& args, std::vector<Expense>& 
 	long double avg = (filtered_data.empty() ? 0 : 1.0 * total / filtered_data.size());
 
 
-	std::cout << "# Summary (" << filtered_data.size() << " entries)\n";
+	std::cout << "# Summary (" << filtered_data.size() << " " << (filtered_data.size() == 1 ? "entry" : "entries") << ")\n";
 	std::cout << "# Minimum: " << min << '\n';
 	std::cout << "# Maximum: " << max << '\n';
 	std::cout << "# Average/exp: " << std::fixed << avg << '\n';
