@@ -29,7 +29,7 @@ namespace expensetracker {
 		{"-p", ARG_PERIOD},
 		{"--period", ARG_PERIOD},
 
-		{"-s", ARG_SORT},
+		{"-r", ARG_SORT},
 		{"--sort", ARG_SORT}
 	};
 
