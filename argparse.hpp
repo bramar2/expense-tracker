@@ -13,6 +13,7 @@ namespace expensetracker {
 	constexpr std::string ARG_END_DATE = "end-date";
 	constexpr std::string ARG_PERIOD = "period";
 	constexpr std::string ARG_SORT = "sort";
+	constexpr std::string ARG_SEARCH = "search";
 
 
 	std::map<std::string, std::string> parse_arg(int argc, char** argv);

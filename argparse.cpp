@@ -30,7 +30,9 @@ namespace expensetracker {
 		{"--period", ARG_PERIOD},
 
 		{"-r", ARG_SORT},
-		{"--sort", ARG_SORT}
+		{"--sort", ARG_SORT},
+
+		{"--search", ARG_SEARCH}
 	};
 
 	std::map<std::string, std::string> parse_arg(int argc, char** argv) {

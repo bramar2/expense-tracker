@@ -241,10 +241,17 @@ int cmd_list(std::map<std::string, std::string>& args, std::vector<Expense>& dat
 		std::cerr << "error: unknown sorting (" << sort_type << ")\n";
 		return 10;	
 	}
-	std::optional<std::string> category;
+	std::optional<std::string> category, searchQuery;
 	if (args.contains(expensetracker::ARG_CATEGORY)) {
 		category = args[expensetracker::ARG_CATEGORY];
 	}
+	if (args.contains(expensetracker::ARG_SEARCH)) {
+		searchQuery = args[expensetracker::ARG_SEARCH];
+		for (char& c : searchQuery.value()) {
+			if (std::islower(c)) c -= 32;
+		}
+	}
+
 
 	std::vector<Expense> filtered_data;
 	for (const Expense& exp : data) {
@@ -257,6 +264,16 @@ int cmd_list(std::map<std::string, std::string>& args, std::vector<Expense>& dat
 		if (category.has_value() && !stringEqualIgnoreCase(exp.category, category.value())) {
 			continue;
 		}
+		if (searchQuery.has_value()) {
+			std::string description = exp.description;
+			for (char& c : description) {
+				if (std::islower(c)) c -= 32;
+			}
+			if (description.find(searchQuery.value()) == std::string::npos) {
+				continue;
+			}
+		}
+
 		filtered_data.push_back(exp);
 	}
 	std::sort(filtered_data.begin(), filtered_data.end(), SORTINGS.at(sort_type));
