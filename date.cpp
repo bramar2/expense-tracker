@@ -1,5 +1,7 @@
 #include "date.hpp"
+#include "argparse.hpp"
 
+#include <iostream>
 #include <charconv>
 #include <stdexcept>
 
@@ -61,6 +63,53 @@ namespace expensetracker {
 		} catch (const std::invalid_argument& exc) {
 			return std::nullopt;
 		}
+	}
+	bool parse_period_args(const std::map<std::string, std::string>& args, Date& start_result, Date& end_result) {
+		bool has_period = args.contains(ARG_PERIOD);
+		bool has_start = args.contains(ARG_START_DATE);
+		bool has_end = args.contains(ARG_END_DATE);
+		if (has_period && (has_start || has_end)) {
+			std::cerr << "error: cannot use period and start-end at the same time\n";
+			return false;
+		}
+		if ((has_start && !has_end) || (has_end && !has_start)) {
+			std::cerr << "error: start and end args have to come together\n";
+			return false;
+		}
+		
+		if (has_period) {
+			if (std::optional<Date> date = parse_date(args.at(ARG_PERIOD)); date.has_value()) {
+				start_result = std::move(date.value());
+				end_result = start_result;
+				if (end_result[2] == 0) end_result[2] = 32;
+			} else {
+				std::cerr << "error: invalid period date arg\n";
+				return false;
+			}
+		} else if (has_start) {
+			if (std::optional<Date> date = parse_date(args.at(ARG_START_DATE)); date.has_value()) {
+				start_result = std::move(date.value());
+			} else {
+				std::cerr << "error: invalid start date arg\n";
+				return false;
+			}
+			if (std::optional<Date> date = parse_date(args.at(ARG_END_DATE)); date.has_value()) {
+				end_result = std::move(date.value());
+				if (end_result[2] == 0) end_result[2] = 32;
+			} else {
+				std::cerr << "error: invalid end date arg\n";
+				return false;
+			}
+
+			if (!date_cmp_less_equal(start_result, end_result)) {
+				std::cerr << "error: start date has to come before end date\n";
+				return false;
+			}
+		} else {
+			start_result = {0, 1, 1};
+			end_result = {9999, 12, 31};
+		}
+		return true;
 	}
 	bool date_cmp_less(const Date& a, const Date& b) {
 		return (a[0] < b[0]) || (a[0] == b[0] &&
