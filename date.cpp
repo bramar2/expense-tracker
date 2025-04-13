@@ -20,7 +20,7 @@ namespace expensetracker {
 		if (first == std::string::npos) {
 			return std::nullopt;
 		}
-		size_t second = dateStr.find('-');
+		size_t second = dateStr.find('-', first + 1);
 		if (second == std::string::npos) second = dateStr.size();
 		try {
 			Date result;
