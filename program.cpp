@@ -226,7 +226,6 @@ int cmd_view(std::map<std::string, std::string>& args, std::vector<Expense>& dat
 		return 10;
 	}
 	print_data({*exp});
-	std::cout << '\n';
 	return 0;
 }
 int cmd_list(std::map<std::string, std::string>& args, std::vector<Expense>& data, bool& updated) {
