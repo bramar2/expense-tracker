@@ -24,3 +24,4 @@ usage: expense-tracker summary --category "Food"
 usage: expense-tracker summary --period 2024-08
 usage: expense-tracker summary --start 2024-08 --end 2024-10
 ```
+![image](https://github.com/user-attachments/assets/6dc87873-70b6-42cf-9f92-b2de598437ea)
