@@ -1,7 +1,5 @@
 #include "expense.hpp"
 
-#include <iostream>
-
 namespace expensetracker {
 
 	void writestr(std::ostream& out, const std::string& str) {
